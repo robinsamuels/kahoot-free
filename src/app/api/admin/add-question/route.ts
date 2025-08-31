@@ -66,20 +66,21 @@ export async function POST(req: Request) {
     const serviceRole = process.env.SUPABASE_SERVICE_ROLE_KEY!;
     const supabase = createClient(url, serviceRole);
 
-    // Determine the sequence ("order") if not provided
-    let seq = body.order;
-    if (seq == null) {
-      const { data: lastQ, error: lastErr } = await supabase
-        .from("questions")
-        .select("order")
-        .eq("quiz_set_id", body.quiz_id)
-        .order("order", { ascending: false })
-        .limit(1)
-        .maybeSingle();
-      if (lastErr && lastErr.code !== "PGRST116") throw lastErr; // ignore 'no rows' error
-      const last = (lastQ as any)?.order ?? 0;
-      seq = Number.isFinite(last) ? (last as number) + 1 : 0;
-    }
+  // Determine the sequence ("order") if not provided
+let seq = body.order;
+if (seq == null) {
+  const { data: lastQ, error: lastErr } = await supabase
+    .from("questions")
+    .select("order")
+    .eq("quiz_set_id", body.quiz_id)
+    .order("order", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  if (lastErr && (lastErr as any).code !== "PGRST116") throw lastErr;
+
+  const last = (lastQ as any)?.order;                 // <— no default here
+  seq = typeof last === "number" && Number.isFinite(last) ? last + 1 : 0;  // <— first = 0
+}
 
     // 1) Insert question
     const questionRow = {
