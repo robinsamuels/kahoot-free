@@ -73,16 +73,7 @@ useEffect(() => {
       .select(`*, choices(*)`)
       .eq('quiz_set_id', quizSetId)
       .order('order', { ascending: true })
-    if (error) {
-     if (attempt <= 5) {
-      const delayMs = Math.min(1000 * Math.pow(2, attempt - 1), 8000);
-      setTimeout(() => getQuestions(quizSetId, attempt + 1), delayMs);
-    } else {
-      console.error('getQuestions failed:', error.message);
-      alert('Could not load questions. Please refresh.');
-    }
-    return;
-    }
+    
     setQuestions(data)
   }
 
