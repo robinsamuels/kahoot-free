@@ -1,3 +1,4 @@
+'use client'
 import { QUESTION_ANSWER_TIME, TIME_TIL_CHOICE_REVEAL } from '@/constants'
 import { Choice, Question, supabase } from '@/types/types'
 import { useState, useEffect } from 'react'
