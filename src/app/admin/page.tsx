@@ -115,7 +115,7 @@ export default function AdminPage() {
           <h1 className="text-xl font-semibold">Admin Login</h1>
           <input
             type="password"
-            placeholder="Enter Admin PIN"
+            placeholder="Enter Admin Password for Rahoot"
             className="w-full border rounded p-2"
             value={adminPass}
             onChange={(e) => setAdminPass(e.target.value)}
@@ -123,7 +123,7 @@ export default function AdminPage() {
           <button onClick={unlock} className="w-full rounded-xl p-2 border hover:bg-gray-50">
             Enter
           </button>
-          <p className="text-xs text-gray-500">Use the PIN you set in <code>ADMIN_PASS</code>.</p>
+          <p className="text-xs text-gray-500">Use the Password you set in <code>ADMIN_PASS</code>.</p>
         </div>
       </div>
     );
