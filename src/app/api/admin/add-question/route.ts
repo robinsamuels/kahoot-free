@@ -78,7 +78,7 @@ export async function POST(req: Request) {
         .maybeSingle();
       if (lastErr && lastErr.code !== "PGRST116") throw lastErr; // ignore 'no rows' error
       const last = (lastQ as any)?.order ?? 0;
-      seq = Number.isFinite(last) ? (last as number) + 1 : 1;
+      seq = Number.isFinite(last) ? (last as number) + 1 : 0;
     }
 
     // 1) Insert question
