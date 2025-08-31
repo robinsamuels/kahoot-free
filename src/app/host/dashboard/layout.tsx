@@ -65,7 +65,7 @@ export default function RootLayout({
   return (
     <>
       <header className="h-16 px-2 flex justify-between border-b border-gray-200 items-center">
-        <h1>SupaQuiz</h1>
+        <h1>Rahoot</h1>
       </header>
       <div className="flex">
         <nav className="border-r border-r-gray-200">
