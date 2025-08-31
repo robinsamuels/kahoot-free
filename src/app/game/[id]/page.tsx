@@ -31,6 +31,22 @@ export default function Home({
   const [currentScreen, setCurrentScreen] = useState(Screens.lobby)
 
   const [questions, setQuestions] = useState<Question[]>()
+// derive a safe current question
+const currentQuestion =
+  questions &&
+  currentQuestionSequence >= 0 &&
+  currentQuestionSequence < questions.length
+    ? questions[currentQuestionSequence]
+    : null;
+
+// if we pass the last question (or no questions), move to results screen
+useEffect(() => {
+  if (screens === Screens.quiz) {
+    if (!questions || questions.length === 0 || currentQuestionSequence >= questions.length) {
+      setScreens(Screens.results);
+    }
+  }
+}, [screens, questions, currentQuestionSequence]);
 
   const [currentQuestionSequence, setCurrentQuestionSequence] = useState(0)
   const [isAnswerRevealed, setIsAnswerRevealed] = useState(false)
@@ -114,13 +130,13 @@ export default function Home({
           gameId={gameId}
         ></Lobby>
       )}
-      {currentScreen == Screens.quiz && questions && (
-        <Quiz
-          question={questions![currentQuestionSequence]}
-          questionCount={questions!.length}
-          participantId={participant!.id}
-          isAnswerRevealed={isAnswerRevealed}
-        ></Quiz>
+      {screens === Screens.quiz && participant && currentQuestion && (
+  <Quiz
+    question={currentQuestion}
+    questionCount={questions.length}
+    participantId={participant.id}
+    isAnswerRevealed={isAnswerRevealed}
+  />
       )}
       {currentScreen == Screens.results && (
         <Results participant={participant!}></Results>
