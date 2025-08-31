@@ -82,17 +82,27 @@ export default function AdminPage() {
     if (options.some((o) => !o.trim())) return alert("All 4 options are required");
 
     setSavingQ(true);
-    try {
-      await api("/api/admin/add-question", "POST", adminPass, {
-        quiz_id: selectedQuizId,
-        type: qType,
-        prompt,
-        image_url: imgUrl.trim() || null,
-        options,
-        correct_index: correctIndex,
-        time_limit_sec: timeLimit,
-        marks,
-      });
+   try {
+  //    await api("/api/admin/add-question", "POST", adminPass, {
+    //    quiz_id: selectedQuizId,
+      //  type: qType,
+  // prompt,
+//        image_url: imgUrl.trim() || null,
+//        options,
+//        correct_index: correctIndex,
+//        time_limit_sec: timeLimit,
+ //       marks,
+ //     });
+await api("/api/admin/add-question", "POST", adminPass, {
+  quiz_id: selectedQuizId,
+  body: prompt,                 // <— map prompt -> body
+  image_url: imgUrl.trim() || null,
+  choices: [optA, optB, optC, optD],  // <— map options -> choices
+  correct_index: correctIndex,
+  order: undefined,             // optional; server will auto-sequence if omitted
+});
+
+      
       // Clear fields for next question
       setPrompt("");
       setImgUrl("");
