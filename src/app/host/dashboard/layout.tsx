@@ -8,6 +8,11 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Rahoot',
   description: 'Fun quiz game powered by Supabase',
+  icons: {
+    icon: '/favicon.ico',                 // default
+    shortcut: '/favicon.ico',
+    apple: '/rahoot_favicon_180.png',     // for iOS home screen
+  },
 }
 
 const menuItems: {
