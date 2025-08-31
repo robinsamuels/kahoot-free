@@ -200,7 +200,7 @@ export default function Quiz({
 
       <div className="flex text-white py-2 px-4 items-center bg-black">
         <div className="text-2xl">
-          {question.order + 1}/{questionCount}
+          {question.order}/{questionCount}
         </div>
       </div>
     </div>
