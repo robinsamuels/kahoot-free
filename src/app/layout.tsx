@@ -5,8 +5,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'SupaQuiz',
-  description: 'OSS Kahoot Alternative powered by Supabase',
+  title: 'Rahoot - A Free Kahoot Alternative by Robin',
+  description: 'Kahoot Alternative powered by Supabase',
 }
 
 export default function RootLayout({
